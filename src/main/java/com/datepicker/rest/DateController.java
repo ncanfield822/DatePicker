@@ -38,22 +38,30 @@ public class DateController {
 	
 	@Autowired
 	private DateRespository dateRepo;
+
 	
 	/**
-	 * Searches for any ideas matching the criteria of the given input object
+	 * Adds or updates a given idea
 	 * 
-	 * @param criteria
-	 * @return a list of all matching ideas, or an empty list if there are none
+	 * @param date
+	 * @param response
 	 */
-	@PostMapping("/findDateIdeas")
-	public @ResponseBody List<DateDTO> findDateIdeas(@RequestBody DateDTO criteria) {
-		//TODO: Updates to return information on invalid fields if criteria CANNOT return results
-		//Find the list and map them to the DTO
-		LOGGER.info("Grabbing Date Ideas");
-		return dateRepo.findAll(new DateSearchSpecification(MAPPER.map(criteria, DateIdea.class))).
-				stream().map((dateIdea) -> MAPPER.map(dateIdea, DateDTO.class)).collect(Collectors.toList());
+	@PutMapping("/putDateIdea")
+	public void putDateIdea(@RequestBody DateDTO date, HttpServletResponse response) {
+		if (RestUtils.validateNewObject(date)) {
+			LOGGER.info("Adding a new date idea");
+			//If the input is valid, save it, overwriting existing data if the ID was provided
+			DateIdea savedDate = dateRepo.save(MAPPER.map(date, DateIdea.class));
+			response.addHeader("Location", "/viewDateIdea/" + savedDate.getDateId());
+			response.setStatus(HttpServletResponse.SC_CREATED); 
+		} else {
+			LOGGER.info("Invalid new date idea received");
+			//TODO: Updates to return what fields are invalid
+			//Since invalid json will fail ahead of time, this is just an invalid entity
+			throw new ResponseStatusException(HttpStatus.UNPROCESSABLE_ENTITY, "Invalid field contents");
+		}
 	}
-	
+
 	/**
 	 * Finds a specific idea by ID
 	 * 
@@ -91,6 +99,21 @@ public class DateController {
 	}
 	
 	/**
+	 * Searches for any ideas matching the criteria of the given input object
+	 * 
+	 * @param criteria
+	 * @return a list of all matching ideas, or an empty list if there are none
+	 */
+	@PostMapping("/findDateIdeas")
+	public @ResponseBody List<DateDTO> findDateIdeas(@RequestBody DateDTO criteria) {
+		//TODO: Updates to return information on invalid fields if criteria CANNOT return results
+		//Find the list and map them to the DTO
+		LOGGER.info("Grabbing Date Ideas");
+		return dateRepo.findAll(new DateSearchSpecification(MAPPER.map(criteria, DateIdea.class))).
+				stream().map((dateIdea) -> MAPPER.map(dateIdea, DateDTO.class)).collect(Collectors.toList());
+	}
+	
+	/**
 	 * Gets one random idea based on input criteria
 	 * 
 	 * @param criteria
@@ -105,28 +128,6 @@ public class DateController {
 		List<DateIdea> dateIdeas = dateRepo.findAll(new DateSearchSpecification(MAPPER.map(criteria, DateIdea.class)));		
 		
 		return MAPPER.map(RestUtils.getRandomIdea(dateIdeas), DateDTO.class);
-	}
-	
-	/**
-	 * Adds or updates a given idea
-	 * 
-	 * @param date
-	 * @param response
-	 */
-	@PutMapping("/putDateIdea")
-	public void putDateIdea(@RequestBody DateDTO date, HttpServletResponse response) {
-		if (RestUtils.validateNewObject(date)) {
-			LOGGER.info("Adding a new date idea");
-			//If the input is valid, save it, overwriting existing data if the ID was provided
-			DateIdea savedDate = dateRepo.save(MAPPER.map(date, DateIdea.class));
-			response.addHeader("Location", "/viewDateIdea/" + savedDate.getDateId());
-			response.setStatus(HttpServletResponse.SC_CREATED); 
-		} else {
-			LOGGER.info("Invalid new date idea received");
-			//TODO: Updates to return what fields are invalid
-			//Since invalid json will fail ahead of time, this is just an invalid entity
-			throw new ResponseStatusException(HttpStatus.UNPROCESSABLE_ENTITY, "Invalid field contents");
-		}
 	}
 }
 	
