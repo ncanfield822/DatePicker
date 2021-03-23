@@ -3,7 +3,9 @@ A start of a simple app to pick random dates for you and your signifigant other 
 
 Right now it does not come prepoluated with any ideas - be sure to add your own!
 
-The pages for it are likewise not complete - they are currently placeholders. You will need soemthing like postman to use the app.
+The pages for it are likewise not complete - they are currently placeholders. You will need soemthing like postman to use the app:
+
+[![Run in Postman](https://run.pstmn.io/button.svg)](https://god.postman.co/run-collection/17b33eaf9e048f52730c?action=collection%2Fimport)
 
 To start it at localhost:8080, download the repo and ensure your java home is set to a jdk 1.8 or higher and run the below command from inside the repo:
 
