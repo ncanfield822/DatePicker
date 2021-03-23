@@ -15,13 +15,13 @@ gradlew bootrun --console=plain
 
 PUT /putDateIdea - Takes a date object and adds it to the database. See below section on building a valid date json
 
-GET /viewDateIdea/[dateId] - Displayes a given date dependant on dateId (IE /viewDateIdea/123)
+GET /viewDateIdea/[dateId] - Displays a given date dependant on dateId (IE /viewDateIdea/123)
 
 DELTE /deteleDateIdea/[dateId] - Deletes a given date dependant on dateId (IE /deleteDateIdea/123)
 
 POST /findDateIdeas - Returns a list of date ideas matching criteria on the date json. See below section on building a valid date json
 
-POST /randomDateIdea - For the more indecesive, returns a single date idea matching criteria on the date json. See below section on building a valid date json
+POST /randomDateIdea - For the more indecisive, returns a single date idea matching criteria on the date json. See below section on building a valid date json
 
 # Building a valid date json
 A valid date JSON looks like the below
