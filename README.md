@@ -48,3 +48,11 @@ For the putDateIdea endpoint, all fields are required and are validated as below
 * dateDescription - String - Must be populated with at least 1 character and less than 255 characters
 * cost - Double - Must be populated and at least 0.0
 * duration - Integer - Must be populated and at least 1
+
+# What's next?
+There are a few features to enhance and add, more may be added later:
+
+* Add more criteria, such as indoor/outdoor activities, seasons for the activity if its outdoor, how much preplanning is required, and other criteria I might think of.
+* Add better feedback for invalid requests
+* Implement html pages with forms for various endpoints
+* Add a script to prepopulate some common/popular ideas to the DB on initialization.
