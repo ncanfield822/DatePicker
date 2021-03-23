@@ -1,9 +1,9 @@
 # DatePicker
 A start of a simple app to pick random dates for you and your signifigant other based on certain criteria (cost and time duration)
 
-Right now it does not come prepoluated with any ideas - be sure to add your own!
+Right now it does not come prepopulated with any ideas - be sure to add your own!
 
-The pages for it are likewise not complete - they are currently placeholders. You will need soemthing like postman (with desktop agent) to use the app:
+The pages for it are likewise not complete - they are currently placeholders. You will need something like postman (with desktop agent) to use the app:
 
 [![Run in Postman](https://run.pstmn.io/button.svg)](https://god.postman.co/run-collection/17b33eaf9e048f52730c?action=collection%2Fimport)
 
@@ -13,11 +13,11 @@ gradlew bootrun --console=plain
 
 # Available endpoints:
 
-PUT /putDateIdea - takes a date object and adds it to the database. See below section on building a valid date json
+PUT /putDateIdea - Takes a date object and adds it to the database. See below section on building a valid date json
 
-GET /viewDateIdea/[dateId] - displayes a given date dependant on dateId (IE /viewDateIdea/123)
+GET /viewDateIdea/[dateId] - Displayes a given date dependant on dateId (IE /viewDateIdea/123)
 
-DELTE /deteleDateIdea/[dateId] - deletes a given date dependant on dateId (IE /deleteDateIdea/123)
+DELTE /deteleDateIdea/[dateId] - Deletes a given date dependant on dateId (IE /deleteDateIdea/123)
 
 POST /findDateIdeas - Returns a list of date ideas matching criteria on the date json. See below section on building a valid date json
 
@@ -40,8 +40,8 @@ For the findDateIdeas and randomDateIdea endpoints, all fields are optional. If 
 
 * dateName - String - Finds dates containing the provided string in the name field
 * dateDescription - String - This is currently unused and will be ignored if provided
-* cost - Double - dates with a cost equal to or less than the provided value will be returned
-* duration - Integer - dates with a duration equal to or less than the provided value will be returned
+* cost - Double - Dates with a cost equal to or less than the provided value will be returned
+* duration - Integer - Dates with a duration equal to or less than the provided value will be returned
 
 
 For the putDateIdea endpoint, all fields are required and are validated as below:
